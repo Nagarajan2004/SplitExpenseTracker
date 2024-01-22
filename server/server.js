@@ -15,28 +15,28 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDb database setup
-// const url = 'mongodb://127.0.0.1:27017/SplitIt';
+const url = process.env.MONGODB_URI;
 
-// const connectToDatabase = async () => {
-//     try {
-//         await mongoose.connect(url, {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true
-//         });
-//         console.log("Database Connected");
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
+const connectToDatabase = async () => {
+    try {
+        await mongoose.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("Database Connected");
+    } catch (err) {
+        console.log(err);
+    }
+};
 
-// connectToDatabase();
+connectToDatabase();
 
-const uri = process.env.MONGODB_URI;
+// const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 // User registration
 app.post('/api/register', async (req, res) => {
